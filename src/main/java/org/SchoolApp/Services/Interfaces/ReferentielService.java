@@ -1,5 +1,7 @@
 package org.SchoolApp.Services.Interfaces;
 
+import org.SchoolApp.Datas.Entity.CompetencesEntity;
+import org.SchoolApp.Datas.Entity.ModulesEntity;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.SchoolApp.Datas.Enums.StatusReferenceEnum;
 
@@ -9,20 +11,29 @@ public interface ReferentielService {
 
     List<ReferentielEntity> getAllReferentiels();
 
-    // Référentiels actifs
-    List<ReferentielEntity> getActiveReferentiels();
+    List<ReferentielEntity> getActiveReferentiels();  // Référentiels actifs
 
-    // Référentiels supprimés
-    List<ReferentielEntity> getDeletedReferentiels();
+    List<ReferentielEntity> getDeletedReferentiels(); // Référentiels supprimés
 
-    // Filtrer les référentiels par statut
     List<ReferentielEntity> getReferentielsByStatus(StatusReferenceEnum status);
 
     ReferentielEntity getReferentielById(Long id);
 
-    ReferentielEntity createReferentiel(ReferentielEntity referentiel);
+    ReferentielEntity createReferentiel(ReferentielEntity referentiel, List<CompetencesEntity> competences); // Création avec compétences
 
     ReferentielEntity updateReferentiel(Long id, ReferentielEntity referentiel);
 
-    void deleteReferentiel(Long id);  // Suppression douce avec vérification des promotions en cours
+    void deleteReferentiel(Long id);
+
+    List<CompetencesEntity> getCompetencesWithModulesByReferentiel(Long referentielId);
+
+    List<ModulesEntity> getModulesByReferentiel(Long referentielId);
+
+    CompetencesEntity addCompetenceToReferentiel(Long referentielId, CompetencesEntity competence);
+
+    ModulesEntity addModuleToCompetence(Long referentielId, Long competenceId, ModulesEntity module);
+
+    void deleteCompetenceFromReferentiel(Long referentielId, Long competenceId);
+
+    void deleteModuleFromCompetence(Long referentielId, Long competenceId, Long moduleId);
 }
