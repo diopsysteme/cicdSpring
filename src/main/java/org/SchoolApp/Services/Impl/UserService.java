@@ -1,4 +1,4 @@
-package Services.Impl;
+package org.SchoolApp.Services.Impl;
 
 public class UserService {
     

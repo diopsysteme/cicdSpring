@@ -1,4 +1,4 @@
-package Datas.Entity;
+package org.SchoolApp.Datas.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

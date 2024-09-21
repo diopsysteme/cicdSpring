@@ -1,4 +1,4 @@
-package Web.Dtos.Response;
+package org.SchoolApp.Web.Dtos.Response;
 
 public class ArticleResponse {
     

@@ -1,4 +1,4 @@
-package Web.Controller.Interfaces;
+package org.SchoolApp.Web.Controller.Interfaces;
 
 public interface Controller {
 }

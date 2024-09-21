@@ -1,7 +1,9 @@
-package Datas.Entity;
+package org.SchoolApp.Datas.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.SchoolApp.Datas.Enums.EtatEnum;
+import org.SchoolApp.Datas.Enums.StatusEnum;
 
 import java.util.Date;
 import java.util.Set;
@@ -22,7 +24,7 @@ public class PromoEntity {
     private int duree;
 
     @Enumerated(EnumType.STRING)
-    private String etat;
+    private EtatEnum etat;
 
     @ManyToMany
     @JoinTable(

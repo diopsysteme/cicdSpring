@@ -1,8 +1,9 @@
-package Datas.Entity;
+package org.SchoolApp.Datas.Entity;
 
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.SchoolApp.Datas.Enums.StatusEnum;
 
 import java.util.Set;
 
@@ -20,18 +21,13 @@ public class UserEntity {
     @Column(unique = true, nullable = false)
     private String Telephone;
 
-    @Column(nullable = true)
-    private int fonction_id;
-
-    private int role_id;
-
     @Column(unique = true, nullable = false)
     private String email;
 
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private String status;
+    private StatusEnum status;
 
     private String photo;
 

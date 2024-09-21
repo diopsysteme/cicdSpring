@@ -1,4 +1,4 @@
-package Datas.Entity;
+package org.SchoolApp.Datas.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,7 +32,4 @@ public class ApprenantEntity {
     @ManyToOne
     @JoinColumn(name = "referentiel_id", nullable = false)
     private ReferentielEntity referentiel;
-
-    @OneToMany(mappedBy = "apprenant")
-    private List<EmargementEntity> emargements;
 }
