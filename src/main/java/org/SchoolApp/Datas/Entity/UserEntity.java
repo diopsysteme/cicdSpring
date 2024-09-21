@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.SchoolApp.Datas.Enums.StatusEnum;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -12,7 +13,11 @@ import java.util.Set;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     private String nom;
     private String prenom;

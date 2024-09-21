@@ -3,6 +3,7 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -10,13 +11,17 @@ import java.util.List;
 public class ModulesEntity {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
     private String nom;
 
     private String description;
 
     private int duree_acquisition;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     @ManyToMany(mappedBy = "modules")
     private List<CompetencesEntity> competences;

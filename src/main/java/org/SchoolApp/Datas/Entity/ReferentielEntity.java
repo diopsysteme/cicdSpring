@@ -3,6 +3,7 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 public class ReferentielEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String libelle;
@@ -20,6 +21,10 @@ public class ReferentielEntity {
     private String code;
 
     private String description;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     private String photo_couverture;
 

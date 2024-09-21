@@ -3,6 +3,7 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -11,7 +12,11 @@ import java.util.Set;
 public class EmargementEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     private Date entree;
     private Date sortie;

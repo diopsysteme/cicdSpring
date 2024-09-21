@@ -3,6 +3,7 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,11 @@ import java.util.List;
 public class CompetencesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     @Column(unique = true, nullable = false)
     private String nom;
