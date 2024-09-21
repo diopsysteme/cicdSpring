@@ -3,7 +3,7 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.SchoolApp.Datas.Enums.EtatEnum;
-import org.SchoolApp.Datas.Enums.StatusEnum;
+import java.time.LocalDateTime;
 
 import java.util.Date;
 import java.util.Set;
@@ -13,7 +13,7 @@ import java.util.Set;
 public class PromoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false,unique = true)
     private String libelle;
@@ -22,6 +22,10 @@ public class PromoEntity {
     private Date date_fin;
 
     private int duree;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     @Enumerated(EnumType.STRING)
     private EtatEnum etat;

@@ -3,14 +3,20 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 public class NotesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private float note;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     @ManyToOne
     @JoinColumn(name = "module_id", nullable = false)

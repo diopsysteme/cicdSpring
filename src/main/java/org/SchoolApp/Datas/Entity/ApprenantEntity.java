@@ -3,6 +3,7 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -10,7 +11,7 @@ import java.util.List;
 public class ApprenantEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String nom_tuteur;
     private String prenom_tuteur;
@@ -20,6 +21,10 @@ public class ApprenantEntity {
     private String diplome_file;
     private String casier_file;
     private String photo_couverture;
+
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
