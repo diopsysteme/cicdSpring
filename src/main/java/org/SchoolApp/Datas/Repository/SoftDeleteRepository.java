@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface SoftDeleteRepository<T,ID> extends JpaRepository<T, ID> {
+public interface SoftDeleteRepository<T, ID> extends JpaRepository<T, ID> {
     @Modifying
     @Transactional
     @Query("UPDATE #{#entityName} e SET e.deleted = true, e.deletedAt = CURRENT_TIMESTAMP WHERE e.id = ?1")
