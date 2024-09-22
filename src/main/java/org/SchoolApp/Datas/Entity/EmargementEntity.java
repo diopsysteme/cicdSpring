@@ -3,7 +3,9 @@ package org.SchoolApp.Datas.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -14,13 +16,17 @@ public class EmargementEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Soft delete fields
     private boolean deleted = false;
+    private Date deletedAt; // This field is necessary for the soft delete logic
 
-    private LocalDateTime deletedAt;
+    // Date and time fields
+    private LocalDate date;  // Date for emargement
+    private LocalTime entree; // Entry time
+    private LocalTime sortie; // Exit time
 
-    private Date entree;
-    private Date sortie;
-
-    @ManyToMany(mappedBy = "emargements")
-    private Set<UserEntity> users;
+    // Change relationship to ManyToOne if each emargement is for a single user
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;  // Assuming each emargement is for one user
 }
