@@ -5,6 +5,7 @@ import org.SchoolApp.Datas.Entity.EmargementEntity;
 import org.SchoolApp.Datas.Entity.UserEntity;
 import org.SchoolApp.Datas.Repository.EmargementRepository;
 import org.SchoolApp.Datas.Repository.UserRepository;
+import org.SchoolApp.Services.Impl.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
