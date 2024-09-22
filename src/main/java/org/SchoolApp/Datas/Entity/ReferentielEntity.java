@@ -2,6 +2,7 @@ package org.SchoolApp.Datas.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.SchoolApp.Datas.Enums.StatusReferenceEnum;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,6 +28,9 @@ public class ReferentielEntity {
     private LocalDateTime deletedAt;
 
     private String photo_couverture;
+
+    @Enumerated(EnumType.STRING)
+    private StatusReferenceEnum status;
 
     @ManyToMany(mappedBy = "referentiels")
     private List<PromoEntity> promos;

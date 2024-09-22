@@ -26,7 +26,7 @@ public class CompetencesEntity {
     @ManyToMany(mappedBy = "competences")
     private List<ReferentielEntity> referentiels;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "competence_module",
             joinColumns = @JoinColumn(name = "competence_id"),
             inverseJoinColumns = @JoinColumn(name = "module_id"))
