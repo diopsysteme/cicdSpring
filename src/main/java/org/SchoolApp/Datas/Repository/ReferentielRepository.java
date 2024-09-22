@@ -11,5 +11,4 @@ public interface ReferentielRepository extends SoftDeleteRepository<ReferentielE
 
     List<ReferentielEntity> findByStatus(StatusReferenceEnum status);
     List<ReferentielEntity> findByDeletedTrue();
-
 }

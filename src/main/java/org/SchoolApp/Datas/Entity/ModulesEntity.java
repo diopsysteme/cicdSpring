@@ -26,6 +26,6 @@ public class ModulesEntity {
     @ManyToMany(mappedBy = "modules")
     private List<CompetencesEntity> competences;
 
-    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<NotesEntity> notes;
 }
