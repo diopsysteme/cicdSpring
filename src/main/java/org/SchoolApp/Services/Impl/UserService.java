@@ -45,9 +45,9 @@ public class UserService {
     }
 
     // Lister tous les utilisateurs non supprimés
-    public List<UserEntity> getAllActiveUsers() {
-        return userRepository.findByDeletedFalse();
-    }
+    //public List<UserEntity> getAllActiveUsers() {
+      //  return userRepository.findByDeletedFalse();
+    //}
 
     // Lister tous les utilisateurs (y compris ceux supprimés)
     public List<UserEntity> getAllUsers() {
