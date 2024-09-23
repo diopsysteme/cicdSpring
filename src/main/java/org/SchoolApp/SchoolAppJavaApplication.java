@@ -14,8 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EntityScan(basePackages = "org.SchoolApp.Datas.Entity")
 @EnableTransactionManagement
 public class SchoolAppJavaApplication implements WebMvcConfigurer {
-
-
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = SpringApplication.run(SchoolAppJavaApplication.class, args);
 	}

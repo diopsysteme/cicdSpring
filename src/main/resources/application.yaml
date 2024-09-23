@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/springschoolapp
-    username: bakemono
-    password: bakemono
+    url: jdbc:postgresql://localhost:5432/learnspring
+    username: csm
+    password: csmuzumaki
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
