@@ -1,13 +1,16 @@
 package org.SchoolApp.Web.Controller.Impl;
 
 import org.SchoolApp.Datas.Entity.NotesEntity;
-import org.SchoolApp.Datas.Request.NoteRequest;
-import org.SchoolApp.Datas.Request.NoteUpdate;
+import org.SchoolApp.Web.Dtos.Mapper.NoteRequestMapper;
+import org.SchoolApp.Web.Dtos.Request.NoteRequest;
+import org.SchoolApp.Web.Dtos.Request.NoteUpdate;
 import org.SchoolApp.Services.Impl.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/notes")
@@ -15,14 +18,20 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    @Autowired
+    private NoteRequestMapper noteRequestMapper;
+
     @PostMapping("/apprenants")
-    public List<NoteRequest> addNoteModules(@RequestBody List<NoteRequest> noteRequest){
-        return noteService.addNotesModules(noteRequest);
+    public HashSet<NotesEntity> addNoteModules(@RequestBody List<NoteRequest> noteRequest){
+        HashSet<NotesEntity> notes = (HashSet<NotesEntity>) noteRequest.stream().map(noteRequestMapper::toEntity).collect(Collectors.toSet());
+        System.out.println(noteRequest);
+        return noteService.addNotesModules(notes);
     }
 
     @PostMapping("modules/{id}")
-    public List<NoteRequest> addNotesGroupe(@RequestBody List<NoteRequest> noteRequest){
-        return noteService.addNotesGroupe(noteRequest);
+    public List<NotesEntity> addNotesGroupe(@RequestBody List<NoteRequest> noteRequest){
+        List<NotesEntity> notes = (List<NotesEntity>) noteRequest.stream().map(noteRequestMapper::toEntity).collect(Collectors.toSet());
+        return noteService.addNotesGroupe(notes);
     }
 
     @PatchMapping("apprenants/{id}")
@@ -32,6 +41,7 @@ public class NoteController {
 
     @GetMapping("")
     public List<NotesEntity> getAllNotes(){
+        System.out.println(noteService.getAllNotes());
         return  noteService.getAllNotes();
     }
 

@@ -2,7 +2,7 @@ package org.SchoolApp.Web.Controller.Impl;
 
 import org.SchoolApp.Datas.Entity.PromoEntity;
 import org.SchoolApp.Datas.Enums.EtatEnum;
-import org.SchoolApp.Datas.Request.PromoRequest;
+import org.SchoolApp.Web.Dtos.Request.PromoRequest;
 import org.SchoolApp.Services.Impl.PromoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

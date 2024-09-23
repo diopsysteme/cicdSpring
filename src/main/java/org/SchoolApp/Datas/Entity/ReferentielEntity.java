@@ -43,6 +43,7 @@ public class ReferentielEntity {
     private Set<PromoEntity> promos = new HashSet<>();
 
     @OneToMany(mappedBy = "referentiel")
+    @JsonIgnore
     private Set<ApprenantEntity> apprenants;
 
     @ManyToMany
@@ -51,6 +52,7 @@ public class ReferentielEntity {
             joinColumns = @JoinColumn(name = "referentiel_id"),
             inverseJoinColumns = @JoinColumn(name = "competence_id")
     )
+    @JsonIgnore
     private Set<CompetencesEntity> competences;
 
     @Override
