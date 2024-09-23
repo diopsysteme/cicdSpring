@@ -21,6 +21,7 @@ public interface ApprenantRepository  extends SoftDeleteRepository<ApprenantEnti
             "JOIN r.promos p " +
             "WHERE p.etat = 'ACTIVE' AND p.deleted = false")
     List<ApprenantEntity> findApprenantsByActivePromo();
+
     @Query("SELECT a FROM ApprenantEntity a " +
             "JOIN a.referentiel r " +
             "JOIN r.promos p " +
@@ -33,5 +34,6 @@ public interface ApprenantRepository  extends SoftDeleteRepository<ApprenantEnti
     List<ApprenantEntity> findApprenantsByPromoIdAndReferentielId(@Param("promoId") Long promoId, @Param("referentielId") Long referentielId);
 
 //    List<ApprenantEntity> findByReferentielAndPromo_Referentiel(ReferentielEntity referentiel, PromoEntity promo);
+
 
 }
