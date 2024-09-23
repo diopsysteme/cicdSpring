@@ -4,6 +4,7 @@ package org.SchoolApp.Datas.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.SchoolApp.Datas.Enums.StatusEnum;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@ToString
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +41,14 @@ public class UserEntity {
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
+    @JsonIgnore
+    @ToString.Exclude
     private Role role;
 
     @ManyToOne
     @JoinColumn(name = "fonction_id", nullable = true)
+    @JsonIgnore
+    @ToString.Exclude
     private Fonction fonction;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -55,6 +61,7 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "emargement_id")
     )
+    @JsonIgnore
     private Set<EmargementEntity> emargements;
 
     @Override

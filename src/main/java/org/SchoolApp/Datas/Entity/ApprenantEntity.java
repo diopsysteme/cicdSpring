@@ -1,14 +1,17 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
+@ToString
 public class ApprenantEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,35 +27,28 @@ public class ApprenantEntity {
     private String photo_couverture;
 
     private boolean deleted = false;
-
     private LocalDateTime deletedAt;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    @ToString.Exclude
     private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "etat_id", nullable = true)
+    @JsonIgnore
+    @ToString.Exclude
     private EtatApprenant etatApprenant;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "referentiel_id", nullable = false)
+    @JsonIgnore
+    @ToString.Exclude
     private ReferentielEntity referentiel;
 
-    @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore // This prevents recursion by marking the back reference
+    @ToString.Exclude
     private List<NotesEntity> notes;
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        ApprenantEntity other = (ApprenantEntity) obj;
-        return id != null && id.equals(other.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31; // or use a constant or just return a unique identifier hash
-    }
 }

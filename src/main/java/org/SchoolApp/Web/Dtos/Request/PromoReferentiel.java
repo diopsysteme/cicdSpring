@@ -1,10 +1,6 @@
-package org.SchoolApp.Datas.Request;
+package org.SchoolApp.Web.Dtos.Request;
 
 import lombok.Data;
-import org.SchoolApp.Datas.Entity.ReferentielEntity;
-
-import java.util.Date;
-import java.util.List;
 
 @Data
 public class PromoReferentiel {

@@ -1,13 +1,16 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Data
+@ToString
 public class CompetencesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +27,14 @@ public class CompetencesEntity {
     private String type;
 
     @ManyToMany(mappedBy = "competences")
+    @JsonIgnore
     private List<ReferentielEntity> referentiels;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "competence_module",
             joinColumns = @JoinColumn(name = "competence_id"),
             inverseJoinColumns = @JoinColumn(name = "module_id"))
+    @JsonIgnore
+    @ToString.Exclude
     private List<ModulesEntity> modules;
 }

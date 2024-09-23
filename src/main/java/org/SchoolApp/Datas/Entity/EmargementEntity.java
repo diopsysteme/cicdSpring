@@ -1,5 +1,6 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,5 +29,6 @@ public class EmargementEntity {
     // Change relationship to ManyToOne if each emargement is for a single user
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private UserEntity user;  // Assuming each emargement is for one user
 }

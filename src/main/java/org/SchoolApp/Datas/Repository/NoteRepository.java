@@ -4,6 +4,7 @@ import org.SchoolApp.Datas.Entity.ApprenantEntity;
 import org.SchoolApp.Datas.Entity.NotesEntity;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.SchoolApp.Datas.Enums.EtatEnum;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -21,4 +22,8 @@ public interface NoteRepository extends SoftDeleteRepository<NotesEntity, Long> 
     List<NotesEntity> findByApprenant_Referentiel_IdAndActivePromo(
             @Param("referentielId") Long referentielId,
             @Param("etat") EtatEnum etat);
+
+    @Override
+    @EntityGraph(attributePaths = {"module", "apprenant"})
+    List<NotesEntity> findAll();
 }

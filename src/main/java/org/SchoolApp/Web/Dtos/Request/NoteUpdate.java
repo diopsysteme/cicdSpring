@@ -1,4 +1,4 @@
-package org.SchoolApp.Datas.Request;
+package org.SchoolApp.Web.Dtos.Request;
 
 import lombok.Data;
 

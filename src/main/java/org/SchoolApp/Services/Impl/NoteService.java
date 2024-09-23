@@ -7,11 +7,11 @@ import org.SchoolApp.Datas.Enums.EtatEnum;
 import org.SchoolApp.Datas.Repository.ApprenantRepository;
 import org.SchoolApp.Datas.Repository.ModulesRepository;
 import org.SchoolApp.Datas.Repository.NoteRepository;
-import org.SchoolApp.Datas.Request.NoteRequest;
-import org.SchoolApp.Datas.Request.NoteUpdate;
+import org.SchoolApp.Web.Dtos.Request.NoteUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -43,19 +43,20 @@ public class NoteService {
         return noteEntity;
     }
 
-    public List<NoteRequest> addNotesGroupe(List<NoteRequest> requests){
-        for (NoteRequest noteRequest : requests) {
-            addNote(noteRequest.getApprenantId(),noteRequest.getNote(),noteRequest.getModuleId());
+    public List<NotesEntity> addNotesGroupe(List<NotesEntity> requests){
+        for (NotesEntity noteRequest : requests) {
+            addNote(noteRequest.getApprenant().getId(),noteRequest.getNote(),noteRequest.getModule().getId());
         }
 
         return requests;
     }
 
-    public List<NoteRequest> addNotesModules(List<NoteRequest> noteRequest){
+    public HashSet<NotesEntity> addNotesModules(HashSet<NotesEntity> noteRequest){
 
-        for (NoteRequest note: noteRequest) {
-            ApprenantEntity apprenant = apprenantRepository.findById(note.getApprenantId()).orElseThrow();
-            addNote(note.getApprenantId(),note.getNote(),note.getModuleId());
+        for (NotesEntity note: noteRequest) {
+            System.out.println(note);
+            ApprenantEntity apprenant = apprenantRepository.findById(note.getApprenant().getId()).orElseThrow();
+            addNote(note.getApprenant().getId(),note.getNote(),note.getModule().getId());
         }
 
         return noteRequest;

@@ -1,28 +1,33 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@ToString
 public class NotesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private float note;
-
     private boolean deleted = false;
-
     private LocalDateTime deletedAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id", nullable = false)
+    @JsonIgnore
+    @ToString.Exclude
     private ModulesEntity module;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apprenant_id", nullable = false)
+    @JsonIgnore
     private ApprenantEntity apprenant;
 }

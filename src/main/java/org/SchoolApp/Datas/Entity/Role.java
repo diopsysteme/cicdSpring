@@ -1,13 +1,16 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
+@ToString
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +19,13 @@ public class Role {
     private String libelle;
 
     @OneToMany(mappedBy = "role")
+    @JsonIgnore
+    @ToString.Exclude
     private List<UserEntity> users;
 
     private boolean deleted = false;
 
     private LocalDateTime deletedAt;
+
+
 }

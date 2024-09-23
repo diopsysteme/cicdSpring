@@ -1,13 +1,16 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
+@ToString
 public class ModulesEntity {
     @Id
     @GeneratedValue
@@ -24,8 +27,11 @@ public class ModulesEntity {
     private LocalDateTime deletedAt;
 
     @ManyToMany(mappedBy = "modules")
+    @JsonIgnore
+    @ToString.Exclude
     private List<CompetencesEntity> competences;
 
-    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<NotesEntity> notes;
 }

@@ -1,5 +1,6 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,5 +25,6 @@ public class EtatApprenant {
     private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "etatApprenant")
+    @JsonIgnore
     private List<ApprenantEntity> apprenants;
 }
