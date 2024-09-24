@@ -1,26 +1,19 @@
-# Step 1: Build the application using Maven in a builder container
-FROM maven:3.8.5-openjdk-21 AS builder
+FROM openjdk:17-jdk-slim
 
-# Set the working directory inside the container
+# Répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copy the application source code into the container
+# Copie tous les fichiers dans le répertoire de travail du conteneur
 COPY . .
 
-# Build the application (this will generate the JAR file in the target directory)
-RUN mvn clean package -DskipTests
+# Rendre le fichier mvnw exécutable
+RUN chmod +x ./mvnw
 
-# Step 2: Use a lightweight OpenJDK image to run the application
-FROM openjdk:21-jdk-slim
+# Compiler l'application sans exécuter les tests
+RUN ./mvnw clean package -DskipTests
 
-# Set the working directory for the runtime container
-WORKDIR /app
+# Exposer le port de votre application Spring Boot (remplacez si nécessaire)
+EXPOSE 3000
 
-# Copy the JAR file from the builder container
-COPY --from=builder /app/target/schoolappjava-0.0.1-snapshot.jar app.jar
-
-# Expose the application port
-EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Commande pour démarrer l'application
+CMD ["java", "-jar", "target/SpringProject-0.0.1-SNAPSHOT.jar"]
