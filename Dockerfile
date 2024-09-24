@@ -1,5 +1,5 @@
 # Step 1: Build the application using Maven in a builder container
-FROM maven:3.9.2-eclipse-temurin-21 AS builder
+FROM maven:3.9.0-openjdk-21 AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Step 2: Use a lightweight OpenJDK image to run the application
-FROM openjdk:21
+FROM openjdk:21-jdk-slim
 
 # Set the working directory for the runtime container
 WORKDIR /app
