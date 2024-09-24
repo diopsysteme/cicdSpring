@@ -7,6 +7,7 @@ import org.SchoolApp.Web.Dtos.Request.NoteRequest;
 import org.SchoolApp.Web.Dtos.Request.NoteUpdate;
 import org.SchoolApp.Services.Impl.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -41,13 +42,20 @@ public class NoteController {
     }
 
     @GetMapping("")
-    public List<NotesEntity> findAll(){
+    public ResponseEntity<List<NotesEntity>> findAll(){
         System.out.println(noteService.findAll());
-        return  noteService.findAll();
+        return  ResponseEntity.ok(noteService.findAll());
     }
 
     @GetMapping("referentiels/{id}")
     public List<NotesEntity> findByReferentiel(@RequestParam Long referentielId){
         return noteService.findByReferentiel(referentielId);
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("Test response");
+    }
+
+
 }

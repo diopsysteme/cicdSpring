@@ -1,45 +1,53 @@
 package org.SchoolApp.Filters;
 
-
-import jakarta.servlet.http.HttpServletResponseWrapper;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponseWrapper;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import java.io.IOException;
-
 public class RestResponseFilter implements Filter {
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        String requestURI = httpRequest.getRequestURI();
+
+        // Skip filtering for specific URIs
+        if (requestURI.startsWith("/api-docs") || requestURI.startsWith("/swagger-ui") || requestURI.equals("/swagger-ui.html")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         // Wrap the response to capture the output
-        CharResponseWrapper responseWrapper = new CharResponseWrapper((HttpServletResponse) response);
+        CharResponseWrapper responseWrapper = new CharResponseWrapper(httpResponse);
 
         // Proceed with the next filter or target resource
         chain.doFilter(request, responseWrapper);
 
-        // Get the original response body
-        String originalResponse = responseWrapper.getCaptureAsString();
+        // Get captured response body as a string
+        String responseBody = responseWrapper.getCaptureAsString();
 
-        // Get the status code
-        int statusCode = responseWrapper.getStatus();
+        // Set the content type
+        httpResponse.setContentType("application/json");
 
-        // Format the response (example structure)
-        String formattedResponse = String.format("{\"status\": %d, \"data\": %s, \"message\": \"\"}", statusCode, originalResponse.isEmpty() ? "null" : originalResponse);
-
-        // Set the response content type and write the formatted response
-        response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
-        out.print(formattedResponse);
-        out.flush();
+        // Write the captured response to the original response
+        // Make sure to check if the response is committed
+        if (!httpResponse.isCommitted()) {
+            httpResponse.getWriter().write(responseBody);
+        }
     }
 
     @Override
@@ -55,6 +63,7 @@ public class RestResponseFilter implements Filter {
     // Inner class to capture the response body
     private class CharResponseWrapper extends HttpServletResponseWrapper {
         private StringWriter writer = new StringWriter();
+        private PrintWriter printWriter = new PrintWriter(writer);
 
         public CharResponseWrapper(HttpServletResponse response) {
             super(response);
@@ -62,10 +71,17 @@ public class RestResponseFilter implements Filter {
 
         @Override
         public PrintWriter getWriter() throws IOException {
-            return new PrintWriter(writer);
+            return printWriter;
+        }
+
+        @Override
+        public void flushBuffer() throws IOException {
+            printWriter.flush(); // Ensure all content is flushed to the writer
+            super.flushBuffer();
         }
 
         public String getCaptureAsString() {
+            printWriter.flush(); // Ensure all content is written to the StringWriter
             return writer.toString();
         }
     }

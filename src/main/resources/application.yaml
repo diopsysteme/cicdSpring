@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/springschoolapp
+    url: jdbc:postgresql://ep-noisy-dawn-a5bgeovq.us-east-2.aws.neon.tech/springschoolapp?user=springschoolapp_owner&password=xryLwpqMj5h4&sslmode=require
     username: bakemono
     password: bakemono
     driver-class-name: org.postgresql.Driver
@@ -8,6 +8,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+server:
+  port: 3000
 
 springdoc:
   api-docs:

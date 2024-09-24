@@ -3,6 +3,7 @@ package org.SchoolApp.Web.Controller.Impl;
 import org.SchoolApp.Datas.Entity.PromoEntity;
 import org.SchoolApp.Datas.Enums.EtatEnum;
 import org.SchoolApp.Web.Controller.Interfaces.CrudController;
+import org.SchoolApp.Web.Controller.Interfaces.Prefix;
 import org.SchoolApp.Web.Dtos.Request.PromoRequest;
 import org.SchoolApp.Services.Impl.PromoService;
 import org.SchoolApp.Web.Dtos.Request.PromoUpdateRequest;
@@ -25,8 +26,8 @@ public class PromoController implements CrudController<PromoEntity,PromoRequest,
     }
 
     @GetMapping("")
-    public List<PromoEntity> findAll(){
-        return promoService.getAllPromos();
+    public ResponseEntity<List<PromoEntity>> findAll(){
+       return ResponseEntity.ok(promoService.getAllPromos());
     }
 
     @GetMapping("/encours")

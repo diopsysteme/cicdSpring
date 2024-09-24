@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.SchoolApp</groupId>
-	<artifactId>SchoolAppJava</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>schoolappjava</artifactId>
+	<version>0.0.1-snapshot</version>
 	<name>SchoolAppJava</name>
-	<description>SchoolAppJava</description>
+	<description>schoolappjava</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -117,5 +117,26 @@
 
 	</dependencies>
 
+	<properties>
+		<java.version>21</java.version>
+		<spring-boot.version>3.2.0</spring-boot.version> <!-- Set your Spring Boot version here -->
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

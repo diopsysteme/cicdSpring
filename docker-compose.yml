@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: springschoolapp
+      POSTGRES_USER: bakemono
+      POSTGRES_PASSWORD: bakemono
+    ports:
+      - "5433:5432" # Corrected port mapping (5432 is the default PostgreSQL port)
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/springschoolapp
+      SPRING_DATASOURCE_USERNAME: bakemono
+      SPRING_DATASOURCE_PASSWORD: bakemono
+
+volumes:
+  pgdata: {}
