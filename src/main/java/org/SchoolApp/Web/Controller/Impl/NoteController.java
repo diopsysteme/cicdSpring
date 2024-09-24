@@ -1,6 +1,7 @@
 package org.SchoolApp.Web.Controller.Impl;
 
 import org.SchoolApp.Datas.Entity.NotesEntity;
+import org.SchoolApp.Web.Controller.Interfaces.CrudController;
 import org.SchoolApp.Web.Dtos.Mapper.NoteRequestMapper;
 import org.SchoolApp.Web.Dtos.Request.NoteRequest;
 import org.SchoolApp.Web.Dtos.Request.NoteUpdate;
@@ -40,15 +41,13 @@ public class NoteController {
     }
 
     @GetMapping("")
-    public List<NotesEntity> getAllNotes(){
-        System.out.println(noteService.getAllNotes());
-        return  noteService.getAllNotes();
+    public List<NotesEntity> findAll(){
+        System.out.println(noteService.findAll());
+        return  noteService.findAll();
     }
 
     @GetMapping("referentiels/{id}")
     public List<NotesEntity> findByReferentiel(@RequestParam Long referentielId){
         return noteService.findByReferentiel(referentielId);
     }
-
-
 }

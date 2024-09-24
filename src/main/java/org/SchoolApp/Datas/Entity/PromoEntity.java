@@ -2,6 +2,7 @@ package org.SchoolApp.Datas.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,14 +17,10 @@ import java.util.Set;
 
 @Data
 @Entity
-public class PromoEntity{
+public class PromoEntity extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
 
     @Column(nullable = false,unique = true)
     private String libelle;
@@ -37,7 +34,7 @@ public class PromoEntity{
     private EtatEnum etat;
 
     @ManyToMany
-    @JsonIgnore
+    @JsonManagedReference
     @JoinTable(
             name = "promotion_referentiel",
             joinColumns = @JoinColumn(name = "promotion_id"),

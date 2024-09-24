@@ -5,10 +5,11 @@ import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-
+@Repository
 public interface PromoRepository extends SoftDeleteRepository<PromoEntity,Long> {
     @Query("SELECT p FROM PromoEntity p WHERE p.etat = 'ACTIF'")
     PromoEntity findActivePromo();

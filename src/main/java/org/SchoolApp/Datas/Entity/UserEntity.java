@@ -13,14 +13,10 @@ import java.util.Set;
 @Data
 @Entity
 @ToString
-public class UserEntity {
+public class UserEntity extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
 
     private String nom;
     private String prenom;

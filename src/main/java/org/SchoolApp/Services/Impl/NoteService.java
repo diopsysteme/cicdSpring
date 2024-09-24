@@ -7,12 +7,14 @@ import org.SchoolApp.Datas.Enums.EtatEnum;
 import org.SchoolApp.Datas.Repository.ApprenantRepository;
 import org.SchoolApp.Datas.Repository.ModulesRepository;
 import org.SchoolApp.Datas.Repository.NoteRepository;
+import org.SchoolApp.Exceptions.ArgumentInsuffisantException;
 import org.SchoolApp.Web.Dtos.Request.NoteUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -25,11 +27,11 @@ public class NoteService {
     @Autowired
     private ModulesRepository modulesRepository;
 
-    public List<NotesEntity> getAllNotes() {
+    public List<NotesEntity> findAll() {
         return noteRepository.findAll();
     }
 
-    public NotesEntity addNote(Long apprenantId,float note,Long moduleId){
+    public NotesEntity Create(Long apprenantId,float note,Long moduleId){
         NotesEntity noteEntity = new NotesEntity();
         ModulesEntity modules = modulesRepository.findById(moduleId).orElseThrow();
         ApprenantEntity apprenant = apprenantRepository.findById(apprenantId).orElseThrow();
@@ -45,7 +47,7 @@ public class NoteService {
 
     public List<NotesEntity> addNotesGroupe(List<NotesEntity> requests){
         for (NotesEntity noteRequest : requests) {
-            addNote(noteRequest.getApprenant().getId(),noteRequest.getNote(),noteRequest.getModule().getId());
+            Create(noteRequest.getApprenant().getId(),noteRequest.getNote(),noteRequest.getModule().getId());
         }
 
         return requests;
@@ -56,15 +58,31 @@ public class NoteService {
         for (NotesEntity note: noteRequest) {
             System.out.println(note);
             ApprenantEntity apprenant = apprenantRepository.findById(note.getApprenant().getId()).orElseThrow();
-            addNote(note.getApprenant().getId(),note.getNote(),note.getModule().getId());
+            Create(note.getApprenant().getId(),note.getNote(),note.getModule().getId());
         }
 
         return noteRequest;
     }
 
+    public NotesEntity Update(Long id,NoteUpdate noteUpdate) throws Exception {
+        NotesEntity noteEntity = noteRepository.findById(id).orElseThrow();
+        noteEntity.setNote(noteUpdate.getNote());
+        return noteRepository.save(noteEntity);
+    }
+
+    public Optional<NotesEntity> Delete(Long id){
+        NotesEntity noteEntity = noteRepository.findById(id).orElseThrow();
+        noteRepository.delete(noteEntity);
+        return Optional.of(noteEntity);
+    }
+
+    public Optional<NotesEntity> findById(Long id){
+        return Optional.of(noteRepository.findById(id).orElseThrow());
+    }
+
     public List<NoteUpdate> updateNotes(List<NoteUpdate> notes) throws Exception {
         if(notes.stream().count() <= 0){
-            throw new Exception("tu dois passer au moins une note a mettre a jour");
+            throw new ArgumentInsuffisantException("tu dois passer au moins une note a mettre a jour");
         }
 
         for (NoteUpdate note : notes) {

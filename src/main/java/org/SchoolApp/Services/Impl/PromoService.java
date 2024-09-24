@@ -5,8 +5,10 @@ import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.SchoolApp.Datas.Enums.EtatEnum;
 import org.SchoolApp.Datas.Repository.PromoRepository;
 import org.SchoolApp.Datas.Repository.ReferentielRepository;
+import org.SchoolApp.Exceptions.ResourceNotFoundException;
 import org.SchoolApp.Web.Dtos.Request.PromoReferentiel;
 import org.SchoolApp.Web.Dtos.Request.PromoRequest;
+import org.SchoolApp.Web.Dtos.Request.PromoUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,7 +71,7 @@ public class PromoService {
              promoRepository.save(promo.get());
             return promos;
         }else{
-            throw new IllegalArgumentException("Le promo n'existe pas");
+            throw new ResourceNotFoundException("Le promo n'existe pas");
         }
     }
 
@@ -82,44 +84,54 @@ public class PromoService {
             promo.get().setEtat(EtatEnum.CLOTURE);
             return promoRepository.save(promo.get());
         }else{
-            throw new IllegalArgumentException("La Date de fin de promo n'est pas encore arrivee");
+            throw new ResourceNotFoundException("La Date de fin de promo n'est pas encore arrivee");
         }
     }
 
-    public PromoEntity updatePromo(Long id,String libelle, Date dateDebut, Date dateFin, int duree, boolean deleted, EtatEnum etat ){
+    public Optional<PromoEntity> findById(Long id){
+        return promoRepository.findById(id);
+    }
+
+    public Void delete(Long id){
+        Optional<PromoEntity> promo = getById(id);
+        promoRepository.delete(promo.get());
+        return null;
+    }
+
+    public PromoEntity update(Long id, PromoUpdateRequest request){
         Optional<PromoEntity> promo = getById(id);
 
         if(promo.isPresent()){
-            if(!libelle.isEmpty()){
-                promo.get().setLibelle(libelle);
+            if(!request.getLibelle().isEmpty()){
+                promo.get().setLibelle(request.getLibelle());
             }
 
-            if(dateDebut!=null){
-                promo.get().setDate_debut(dateDebut);
+            if(request.getDateDebut()!=null){
+                promo.get().setDate_debut(request.getDateDebut());
             }
 
-            if(dateFin!=null){
-                promo.get().setDate_fin(dateFin);
+            if(request.getDateFin()!=null){
+                promo.get().setDate_fin(request.getDateFin());
             }
 
-            if(duree!=0){
-                promo.get().setDuree(duree);
+            if(request.getDuree()!=0){
+                promo.get().setDuree(request.getDuree());
             }
 
-            if(etat!=null){
-                promo.get().setEtat(etat);
+            if(request.getEtat()!=null){
+                promo.get().setEtat(request.getEtat());
             }
 
             return promoRepository.save(promo.get());
         }else {
-            throw new IllegalArgumentException("Le promo n'existe pas");
+            throw new ResourceNotFoundException("Le promo n'existe pas");
         }
     }
 
     public PromoEntity addOrDeleteReferentiel(Long promoId,Long referentielId, boolean add){
-        PromoEntity promo = getById(promoId).orElseThrow(() -> new IllegalArgumentException("Promotion not found"));
+        PromoEntity promo = getById(promoId).orElseThrow(() -> new ResourceNotFoundException("Promotion not found"));
 
-            ReferentielEntity referentiel = referentielRepository.findById(referentielId).orElseThrow(() -> new IllegalArgumentException("Referentiel not found"));
+            ReferentielEntity referentiel = referentielRepository.findById(referentielId).orElseThrow(() -> new ResourceNotFoundException("Referentiel not found"));
             if(add){
                 promo.getReferentiels().add(referentiel);
             }else {
@@ -131,7 +143,7 @@ public class PromoService {
 
     @Transactional
     public Set<PromoReferentiel> findReferentielActif(Long promoId){
-        PromoEntity promo = getById(promoId).orElseThrow(() -> new IllegalArgumentException("Promotion not found"));
+        PromoEntity promo = getById(promoId).orElseThrow(() -> new ResourceNotFoundException("Promotion not found"));
 
         return promo.getReferentiels().stream().map(
                 referentiel -> {

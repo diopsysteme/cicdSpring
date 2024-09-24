@@ -1,9 +1,6 @@
 package org.SchoolApp.Datas.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.SchoolApp.Datas.Enums.StatusReferenceEnum;
@@ -16,7 +13,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class ReferentielEntity {
+public class ReferentielEntity extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,17 +26,13 @@ public class ReferentielEntity {
 
     private String description;
 
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
-
     private String photo_couverture;
 
     @Enumerated(EnumType.STRING)
     private StatusReferenceEnum status;
 
     @ManyToMany(mappedBy = "referentiels",fetch = FetchType.EAGER)
-    @JsonIgnore
+    @JsonBackReference
     private Set<PromoEntity> promos = new HashSet<>();
 
     @OneToMany(mappedBy = "referentiel")

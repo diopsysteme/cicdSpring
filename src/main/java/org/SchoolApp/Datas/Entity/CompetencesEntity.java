@@ -11,14 +11,10 @@ import java.util.List;
 @Entity
 @Data
 @ToString
-public class CompetencesEntity {
+public class CompetencesEntity extends EntityAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
 
     @Column(unique = true, nullable = false)
     private String nom;

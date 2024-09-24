@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @ToString
-public class Role {
+public class Role extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +22,4 @@ public class Role {
     @JsonIgnore
     @ToString.Exclude
     private List<UserEntity> users;
-
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
-
-
 }

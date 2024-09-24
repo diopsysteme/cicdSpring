@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class EtatApprenant {
+public class EtatApprenant extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,10 +19,6 @@ public class EtatApprenant {
 
     @Column(nullable = false)
     private String motif;
-
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "etatApprenant")
     @JsonIgnore

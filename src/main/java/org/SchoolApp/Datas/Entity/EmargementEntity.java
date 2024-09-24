@@ -12,23 +12,18 @@ import java.util.Set;
 
 @Data
 @Entity
-public class EmargementEntity {
+public class EmargementEntity extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Soft delete fields
-    private boolean deleted = false;
-    private Date deletedAt; // This field is necessary for the soft delete logic
 
-    // Date and time fields
-    private LocalDate date;  // Date for emargement
-    private LocalTime entree; // Entry time
-    private LocalTime sortie; // Exit time
+    private LocalDate date;
+    private LocalTime entree;
+    private LocalTime sortie;
 
-    // Change relationship to ManyToOne if each emargement is for a single user
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private UserEntity user;  // Assuming each emargement is for one user
+    private UserEntity user;
 }
