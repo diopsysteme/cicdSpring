@@ -1,14 +1,26 @@
-# Step 1: Use an official OpenJDK runtime as a parent image
-FROM openjdk:21
+# Step 1: Build the application using Maven in a builder container
+FROM maven:3.9.2-eclipse-temurin-21 AS builder
 
-# Step 2: Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Step 3: Copy the executable JAR from the target folder into the container
-COPY target/schoolappjava-0.0.1-snapshot.jar app.jar
+# Copy the application source code into the container
+COPY . .
 
-# Step 4: Expose the port that the Spring Boot app will run on
+# Build the application (this will generate the JAR file in the target directory)
+RUN mvn clean package -DskipTests
+
+# Step 2: Use a lightweight OpenJDK image to run the application
+FROM openjdk:21
+
+# Set the working directory for the runtime container
+WORKDIR /app
+
+# Copy the JAR file from the builder container
+COPY --from=builder /app/target/schoolappjava-0.0.1-snapshot.jar app.jar
+
+# Expose the application port
 EXPOSE 8080
 
-# Step 5: Run the JAR file
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
