@@ -9,6 +9,6 @@ public class ReferentielRequestDto {
     private String libelle;
     private String code;
     private String description;
-    private String photoCouverture;
+    private String photo_couverture;
     private List<CompetenceRequestDto> competences;
 }

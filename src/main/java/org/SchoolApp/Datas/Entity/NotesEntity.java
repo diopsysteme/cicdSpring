@@ -1,5 +1,6 @@
 package org.SchoolApp.Datas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -11,14 +12,12 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @ToString
-public class NotesEntity {
+public class NotesEntity extends EntityAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private float note;
-    private boolean deleted = false;
-    private LocalDateTime deletedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id", nullable = false)
@@ -26,8 +25,8 @@ public class NotesEntity {
     @ToString.Exclude
     private ModulesEntity module;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "apprenant_id", nullable = false)
-    @JsonIgnore
+    @JsonManagedReference
     private ApprenantEntity apprenant;
 }

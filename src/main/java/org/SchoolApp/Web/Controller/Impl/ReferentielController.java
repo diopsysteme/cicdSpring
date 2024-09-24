@@ -3,7 +3,7 @@ package org.SchoolApp.Web.Controller.Impl;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.SchoolApp.Datas.Enums.StatusReferenceEnum;
 import org.SchoolApp.Services.Interfaces.ReferentielService;
-import org.SchoolApp.Web.Dtos.Mappers.ReferentielMapper;
+import org.SchoolApp.Web.Dtos.Mapper.ReferentielMapper;
 import org.SchoolApp.Web.Dtos.Request.ReferentielRequestDto;
 import org.SchoolApp.Web.Dtos.Request.ReferentielUpdateRequestDto;
 import org.SchoolApp.Web.Dtos.Response.ReferentielResponseDto;

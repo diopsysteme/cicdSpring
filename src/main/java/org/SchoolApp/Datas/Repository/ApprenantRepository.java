@@ -1,8 +1,6 @@
 package org.SchoolApp.Datas.Repository;
 
 import org.SchoolApp.Datas.Entity.ApprenantEntity;
-import org.SchoolApp.Datas.Entity.PromoEntity;
-import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -32,8 +30,4 @@ public interface ApprenantRepository  extends SoftDeleteRepository<ApprenantEnti
             "JOIN r.promos p " +
             "WHERE p.id = :promoId AND r.id = :referentielId AND p.deleted = false")
     List<ApprenantEntity> findApprenantsByPromoIdAndReferentielId(@Param("promoId") Long promoId, @Param("referentielId") Long referentielId);
-
-//    List<ApprenantEntity> findByReferentielAndPromo_Referentiel(ReferentielEntity referentiel, PromoEntity promo);
-
-
 }

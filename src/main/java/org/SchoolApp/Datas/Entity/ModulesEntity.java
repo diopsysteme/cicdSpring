@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @ToString
-public class ModulesEntity {
+public class ModulesEntity  extends EntityAbstract{
     @Id
     @GeneratedValue
     private Long id;
@@ -21,10 +21,6 @@ public class ModulesEntity {
     private String description;
 
     private int duree_acquisition;
-
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
 
     @ManyToMany(mappedBy = "modules")
     @JsonIgnore

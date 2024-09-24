@@ -2,6 +2,7 @@ package org.SchoolApp.Datas.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @ToString
-public class ApprenantEntity {
+public class ApprenantEntity extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,8 +27,6 @@ public class ApprenantEntity {
     private String casier_file;
     private String photo_couverture;
 
-    private boolean deleted = false;
-    private LocalDateTime deletedAt;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -48,7 +47,7 @@ public class ApprenantEntity {
     private ReferentielEntity referentiel;
 
     @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore // This prevents recursion by marking the back reference
+    @JsonBackReference
     @ToString.Exclude
     private List<NotesEntity> notes;
 }

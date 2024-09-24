@@ -10,14 +10,10 @@ import java.util.List;
 @Data
 @Entity
 @ToString
-public class Fonction {
+public class Fonction extends EntityAbstract{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private boolean deleted = false;
-
-    private LocalDateTime deletedAt;
 
     private String libelle;
 
