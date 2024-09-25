@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.SchoolApp</groupId>
-	<artifactId>SchoolAppJava</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>schoolappjava</artifactId>
+	<version>0.0.1-snapshot</version>
 	<name>SchoolAppJava</name>
 	<description>SchoolAppJava</description>
 	<url/>
@@ -113,9 +113,36 @@
 			<version>1.6.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+
 
 
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

@@ -34,20 +34,26 @@ public class ReferentielController {
 
 
     @GetMapping
-    public ResponseEntity<List<ReferentielResponseDto>> listReferentiels(@RequestParam(required = false) StatusReferenceEnum status) {
+    public ResponseEntity<List<ReferentielResponseDto>> listReferentiels(
+            @RequestParam(required = false) StatusReferenceEnum status) {
+
         List<ReferentielEntity> referentiels;
 
+        // Conditional logic for filtering by status or fetching all active ones
         if (status != null) {
             referentiels = referentielService.listReferentielsByStatus(status);
         } else {
-            referentiels = referentielService.listActiveReferentiels();  // Liste des référentiels actifs
+            referentiels = referentielService.listActiveReferentiels();
         }
+
+        // Mapping entities to DTOs
         List<ReferentielResponseDto> responseDtos = referentiels.stream()
                 .map(referentielMapper::toDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(responseDtos);
     }
+
 
 
 
@@ -64,14 +70,33 @@ public class ReferentielController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReferentielResponseDto> getReferentielById(@PathVariable Long id) {
+    public ResponseEntity<ReferentielResponseDto> getReferentielById(
+            @PathVariable Long id,
+            @RequestParam(required = false) Long competenceId,
+            @RequestParam(required = false) Long moduleId) {
         ReferentielEntity referentiel = referentielService.getReferentielById(id);
         if (referentiel == null) {
             return ResponseEntity.notFound().build();
         }
+
         ReferentielResponseDto referentielDto = referentielMapper.toDto(referentiel);
+        if (competenceId != null) {
+            referentielDto.setCompetences(referentielDto.getCompetences().stream()
+                    .filter(competence -> competence.getId().equals(competenceId))
+                    .collect(Collectors.toList()));
+        }
+
+        if (moduleId != null) {
+            referentielDto.getCompetences().forEach(competence -> {
+                competence.setModules(competence.getModules().stream()
+                        .filter(module -> module.getId().equals(moduleId))
+                        .collect(Collectors.toList()));
+            });
+        }
+
         return ResponseEntity.ok(referentielDto);
     }
+
 
 
     @PatchMapping("/{id}")
