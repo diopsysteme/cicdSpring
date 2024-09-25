@@ -1,7 +1,6 @@
 package org.SchoolApp.Datas.Repository;
 
 import org.SchoolApp.Datas.Entity.PromoEntity;
-import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,16 +17,16 @@ public interface PromoRepository extends SoftDeleteRepository<PromoEntity,Long> 
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE promo_referentiel "
+    @Query(value = "UPDATE promotion_referentiel "
             + "SET deleted = true "
-            + "WHERE promo_id = :promoId AND referentiel_id = :referentielId", nativeQuery = true)
+            + "WHERE promotion_id = :promoId AND referentiel_id = :referentielId", nativeQuery = true)
     void softDeleteAssociation(@Param("promoId") Long promoId, @Param("referentielId") Long referentielId);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE promo_referentiel "
+    @Query(value = "UPDATE promotion_referentiel "
             + "SET deleted = false "
-            + "WHERE promo_id = :promoId AND referentiel_id = :referentielId", nativeQuery = true)
+            + "WHERE promotion_id = :promoId AND referentiel_id = :referentielId", nativeQuery = true)
     void restoreAssociation(@Param("promoId") Long promoId, @Param("referentielId") Long referentielId);
 
 

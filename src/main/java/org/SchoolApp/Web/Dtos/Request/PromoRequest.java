@@ -2,6 +2,8 @@ package org.SchoolApp.Web.Dtos.Request;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import org.SchoolApp.Datas.Entity.PromoEntity;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
@@ -16,19 +18,21 @@ import java.util.Set;
 @Data
 public class PromoRequest {
     @NotBlank
+    @NotNull
     @UniqueField(entity = PromoEntity.class,field = "libelle")
     private String libelle;
 
-    @NotBlank
+    @NotNull
     private Date dateDebut;
-    @NotBlank
+    @NotNull
     @Future
     private Date dateFin;
-    @NotBlank
+    @NotNull
     private boolean deleted;
-    @NotBlank
+    @NotNull
+    @Positive
     private int duree;
-    @NotBlank
+    @NotNull
     private EtatEnum etat;
-    private Optional<Set<ReferentielEntity>> referentiels;
+    private Set<ReferentielDto> referentiels;
 }

@@ -1,19 +1,14 @@
-FROM openjdk:17-jdk-slim
+# Step 1: Use an official OpenJDK runtime as a parent image
+FROM openjdk:21
 
-# Répertoire de travail dans le conteneur
+# Step 2: Set the working directory in the container
 WORKDIR /app
 
-# Copie tous les fichiers dans le répertoire de travail du conteneur
-COPY . .
+# Step 3: Copy the executable JAR from the target folder into the container
+COPY target/schoolappjava-0.0.1-snapshot.jar app.jar
 
-# Rendre le fichier mvnw exécutable
-RUN chmod +x ./mvnw
+# Step 4: Expose the port that the Spring Boot app will run on
+EXPOSE 8080
 
-# Compiler l'application sans exécuter les tests
-RUN ./mvnw clean package -DskipTests
-
-# Exposer le port de votre application Spring Boot (remplacez si nécessaire)
-EXPOSE 3000
-
-# Commande pour démarrer l'application
-CMD ["java", "-jar", "target/SpringProject-0.0.1-SNAPSHOT.jar"]
+# Step 5: Run the JAR file
+ENTRYPOINT ["java", "-jar", "app.jar"]

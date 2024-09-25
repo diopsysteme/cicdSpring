@@ -1,5 +1,6 @@
 package org.SchoolApp.Web.Controller.Impl;
 
+import jakarta.validation.Valid;
 import org.SchoolApp.Datas.Entity.NotesEntity;
 import org.SchoolApp.Web.Controller.Interfaces.CrudController;
 import org.SchoolApp.Web.Dtos.Mapper.NoteRequestMapper;
@@ -24,20 +25,20 @@ public class NoteController {
     private NoteRequestMapper noteRequestMapper;
 
     @PostMapping("/apprenants")
-    public HashSet<NotesEntity> addNoteModules(@RequestBody List<NoteRequest> noteRequest){
+    public HashSet<NotesEntity> addNoteModules(@Valid @RequestBody HashSet<NoteRequest> noteRequest){
         HashSet<NotesEntity> notes = (HashSet<NotesEntity>) noteRequest.stream().map(noteRequestMapper::toEntity).collect(Collectors.toSet());
         System.out.println(noteRequest);
         return noteService.addNotesModules(notes);
     }
 
     @PostMapping("modules/{id}")
-    public List<NotesEntity> addNotesGroupe(@RequestBody List<NoteRequest> noteRequest){
-        List<NotesEntity> notes = (List<NotesEntity>) noteRequest.stream().map(noteRequestMapper::toEntity).collect(Collectors.toSet());
+    public HashSet<NotesEntity> addNotesGroupe(@Valid @RequestBody HashSet<NoteRequest> noteRequest){
+        HashSet<NotesEntity> notes = (HashSet<NotesEntity>) noteRequest.stream().map(noteRequestMapper::toEntity).collect(Collectors.toSet());
         return noteService.addNotesGroupe(notes);
     }
 
     @PatchMapping("apprenants/{id}")
-    public List<NoteUpdate> updateNoteModules(@RequestBody List<NoteUpdate> noteUpdate) throws Exception {
+    public List<NoteUpdate> updateNoteModules(@Valid @RequestBody List<NoteUpdate> noteUpdate) throws Exception {
         return noteService.updateNotes(noteUpdate);
     }
 

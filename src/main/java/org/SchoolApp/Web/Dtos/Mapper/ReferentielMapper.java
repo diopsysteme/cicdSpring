@@ -13,7 +13,6 @@ public interface ReferentielMapper {
 
     ReferentielEntity toEntity(ReferentielRequestDto referentielRequestDto);
 
-    @Mapping(source = "status", target = "status")  // Map status as a string
     ReferentielResponseDto toDto(ReferentielEntity referentielEntity);
 
     ReferentielEntity toEntity(ReferentielUpdateRequestDto referentielUpdateRequestDto);

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:latest
@@ -20,7 +18,7 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/springschoolapp
+      SPRING_DATASOURCE_URL: jdbc:postgresql://ep-noisy-dawn-a5bgeovq.us-east-2.aws.neon.tech/springschoolapp?user=springschoolapp_owner&password=xryLwpqMj5h4&sslmode=require
       SPRING_DATASOURCE_USERNAME: bakemono
       SPRING_DATASOURCE_PASSWORD: bakemono
 

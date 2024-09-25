@@ -1,16 +1,31 @@
 package org.SchoolApp.Web.Dtos.Request;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
+import org.SchoolApp.Datas.Entity.CompetencesEntity;
+import org.SchoolApp.Web.Validators.UniqueField;
 
 import java.util.List;
 
 @Data
 public class CompetenceUpdateRequestDto {
-    private Long id;  // Si la compétence existe, on peut passer son ID, sinon null pour en ajouter une nouvelle
+    @NotNull
+    private Long id;
+    @NotNull
+    @NotBlank
+    @UniqueField(entity = CompetencesEntity.class,field = "nom",message = "cette competence exist deja")
     private String nom;
+    @NotNull
+    @NotBlank
     private String description;
+    @Positive
+    @NotNull
     private int dureeAcquisition;
+    @NotNull
+    @NotBlank
     private String type;
-    private boolean deleted = false; // Indique si la compétence doit être soft-deleted
+    private boolean deleted = false;
     private List<ModuleUpdateRequestDto> modules;
 }
