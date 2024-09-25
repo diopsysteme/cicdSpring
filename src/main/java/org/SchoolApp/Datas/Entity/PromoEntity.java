@@ -35,6 +35,7 @@ public class PromoEntity extends EntityAbstract{
 
     @ManyToMany
     @JsonManagedReference
+    @JsonIgnore
     @JoinTable(
             name = "promotion_referentiel",
             joinColumns = @JoinColumn(name = "promotion_id"),
@@ -47,7 +48,7 @@ public class PromoEntity extends EntityAbstract{
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        UserEntity other = (UserEntity) obj;
+        PromoEntity other = (PromoEntity) obj;
         return id != null && id.equals(other.getId());
     }
 

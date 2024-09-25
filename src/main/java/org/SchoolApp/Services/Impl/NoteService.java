@@ -45,7 +45,7 @@ public class NoteService {
         return noteEntity;
     }
 
-    public List<NotesEntity> addNotesGroupe(List<NotesEntity> requests){
+    public HashSet<NotesEntity> addNotesGroupe(HashSet<NotesEntity> requests){
         for (NotesEntity noteRequest : requests) {
             Create(noteRequest.getApprenant().getId(),noteRequest.getNote(),noteRequest.getModule().getId());
         }

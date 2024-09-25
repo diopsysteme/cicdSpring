@@ -12,7 +12,7 @@
 	<artifactId>schoolappjava</artifactId>
 	<version>0.0.1-snapshot</version>
 	<name>SchoolAppJava</name>
-	<description>SchoolAppJava</description>
+	<description>schoolappjava</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -69,11 +69,22 @@
 			<version>2.1.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<version>3.3.4</version>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.4.1</version>
 		</dependency>
 
 
@@ -113,27 +124,21 @@
 			<version>1.6.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>core</artifactId>
-			<version>3.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>javase</artifactId>
-			<version>3.4.1</version>
-		</dependency>
-
 
 
 	</dependencies>
+
+	<properties>
+		<java.version>21</java.version>
+		<spring-boot.version>3.2.0</spring-boot.version> <!-- Set your Spring Boot version here -->
+	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>${spring-boot.version}</version>
 				<executions>
 					<execution>
 						<goals>

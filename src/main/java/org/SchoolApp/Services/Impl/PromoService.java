@@ -6,9 +6,7 @@ import org.SchoolApp.Datas.Enums.EtatEnum;
 import org.SchoolApp.Datas.Repository.PromoRepository;
 import org.SchoolApp.Datas.Repository.ReferentielRepository;
 import org.SchoolApp.Exceptions.ResourceNotFoundException;
-import org.SchoolApp.Web.Dtos.Request.PromoReferentiel;
-import org.SchoolApp.Web.Dtos.Request.PromoRequest;
-import org.SchoolApp.Web.Dtos.Request.PromoUpdateRequest;
+import org.SchoolApp.Web.Dtos.Request.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +31,14 @@ public class PromoService {
         promoEntity.setDuree(promoRequest.getDuree());
         promoEntity.setEtat(promoRequest.getEtat());
         if(promoRequest.getReferentiels() != null){
-            promoEntity.setReferentiels(promoRequest.getReferentiels().get());
+                Set<ReferentielEntity> referentielEntities = new HashSet<>();
+            for (ReferentielDto referentiel : promoRequest.getReferentiels()){
+                Optional<ReferentielEntity> referentielEntity = referentielRepository.findById(referentiel.getId());
+                if(referentielEntity.isPresent()){
+                    referentielEntities.add(referentielEntity.get());
+                }
+            }
+            promoEntity.setReferentiels(referentielEntities);
         }
         return promoRepository.save(promoEntity);
     }
@@ -142,16 +147,19 @@ public class PromoService {
     }
 
     @Transactional
-    public Set<PromoReferentiel> findReferentielActif(Long promoId){
+    public Set<ReferentielEntity> findReferentielActif(Long promoId){
         PromoEntity promo = getById(promoId).orElseThrow(() -> new ResourceNotFoundException("Promotion not found"));
 
-        return promo.getReferentiels().stream().map(
-                referentiel -> {
-                    PromoReferentiel referentielEntity = new PromoReferentiel();
-                    referentielEntity.setCode(referentiel.getCode());
-                    referentielEntity.setLibelle(referentiel.getLibelle());
-                    return referentielEntity;
-                }
-        ).collect(Collectors.toSet());
+        return promo.getReferentiels().stream().collect(Collectors.toSet());
+    }
+
+    public Void deleteReferentiel(Long promoId, Long referentielId){
+        promoRepository.softDeleteAssociation(promoId, referentielId);
+        return null;
+    }
+
+    public Void restoreRefentiel(Long promoId, Long referentielId){
+        promoRepository.restoreAssociation(promoId, referentielId);
+        return null;
     }
 }
