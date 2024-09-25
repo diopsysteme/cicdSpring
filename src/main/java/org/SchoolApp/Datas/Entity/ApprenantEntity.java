@@ -18,15 +18,20 @@ public class ApprenantEntity extends EntityAbstract{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nom_tuteur;
-    private String prenom_tuteur;
-    private String contact_tuteur;
-    private String cni_file;
-    private String extrait_file;
-    private String diplome_file;
-    private String casier_file;
-    private String photo_couverture;
+    private String nomTuteur;
+    private String prenomTuteur;
+    private String contactTuteur;
+    private String cniFile;
+    private String extraitFile;
+    private String diplomeFile;
+    private String casierFile;
+    private String photoCouverture;
 
+    // New fields for matricule and QR code link
+    @Column(unique = true)
+    private String matricule;
+
+    private String qrCodeLink; // Field to store the QR code link
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -46,7 +51,7 @@ public class ApprenantEntity extends EntityAbstract{
     @ToString.Exclude
     private ReferentielEntity referentiel;
 
-    @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     @ToString.Exclude
     private List<NotesEntity> notes;

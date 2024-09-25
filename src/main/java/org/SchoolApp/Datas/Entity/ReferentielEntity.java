@@ -26,10 +26,12 @@ public class ReferentielEntity extends EntityAbstract{
 
     private String description;
 
-    private String photo_couverture;
+    private String photoCouverture;
 
     @Enumerated(EnumType.STRING)
-    private StatusReferenceEnum status;
+    @Column(nullable = false)
+    private StatusReferenceEnum status = StatusReferenceEnum.Inactif; // Set default value to 'Inactif'
+
 
     @ManyToMany(mappedBy = "referentiels",fetch = FetchType.EAGER)
     @JsonBackReference
@@ -52,7 +54,7 @@ public class ReferentielEntity extends EntityAbstract{
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        UserEntity other = (UserEntity) obj;
+        ReferentielEntity other = (ReferentielEntity) obj;
         return id != null && id.equals(other.getId());
     }
 
