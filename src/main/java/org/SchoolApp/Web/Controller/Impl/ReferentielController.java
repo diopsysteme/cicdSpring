@@ -1,5 +1,6 @@
 package org.SchoolApp.Web.Controller.Impl;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.SchoolApp.Datas.Enums.StatusReferenceEnum;
 import org.SchoolApp.Services.Interfaces.ReferentielService;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/referentiels")
+@RequestMapping("referentiels")
 public class ReferentielController {
 
     @Autowired
@@ -96,8 +97,6 @@ public class ReferentielController {
 
         return ResponseEntity.ok(referentielDto);
     }
-
-
 
     @PatchMapping("/{id}")
     public ResponseEntity<ReferentielResponseDto> modifyReferentiel(

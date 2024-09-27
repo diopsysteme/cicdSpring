@@ -8,8 +8,7 @@ import lombok.Data;
 import org.SchoolApp.Datas.Entity.PromoEntity;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
 import org.SchoolApp.Datas.Enums.EtatEnum;
-import org.SchoolApp.Web.Validators.UniqueField;
-import org.hibernate.validator.constraints.UniqueElements;
+import org.SchoolApp.Validators.UniqueField;
 
 import java.util.Date;
 import java.util.Optional;

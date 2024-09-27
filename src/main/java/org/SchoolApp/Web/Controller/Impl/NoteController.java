@@ -1,5 +1,6 @@
 package org.SchoolApp.Web.Controller.Impl;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.SchoolApp.Datas.Entity.NotesEntity;
 import org.SchoolApp.Web.Controller.Interfaces.CrudController;

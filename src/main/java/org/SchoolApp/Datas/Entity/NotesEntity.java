@@ -13,9 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @ToString
 public class NotesEntity extends EntityAbstract {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 
     private float note;
 

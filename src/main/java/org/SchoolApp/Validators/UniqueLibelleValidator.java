@@ -1,4 +1,4 @@
-package org.SchoolApp.Web.Validators;
+package org.SchoolApp.Validators;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

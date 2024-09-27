@@ -12,9 +12,7 @@ import java.util.List;
 @Entity
 @ToString
 public class ModulesEntity  extends EntityAbstract{
-    @Id
-    @GeneratedValue
-    private Long id;
+
 
     private String nom;
 

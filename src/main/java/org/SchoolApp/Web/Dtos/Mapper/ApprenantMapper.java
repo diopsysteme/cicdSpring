@@ -10,6 +10,7 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring", uses = {UserMapper.class, ReferentielMapper.class, PromoMapper.class})
 public interface ApprenantMapper {
 
+
     ApprenantEntity toEntity(ApprenantRequestDto dto);
 
     ApprenantResponseDto toDto(ApprenantEntity entity);

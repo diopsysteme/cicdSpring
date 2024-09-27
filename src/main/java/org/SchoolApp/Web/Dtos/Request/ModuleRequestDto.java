@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import org.SchoolApp.Datas.Entity.ModulesEntity;
-import org.SchoolApp.Web.Validators.UniqueField;
+import org.SchoolApp.Validators.UniqueField;
 
 @Data
 public class ModuleRequestDto {

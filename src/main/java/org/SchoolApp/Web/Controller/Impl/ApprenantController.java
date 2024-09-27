@@ -1,5 +1,6 @@
 package org.SchoolApp.Web.Controller.Impl;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.SchoolApp.Services.Interfaces.ApprenantService;
 import org.SchoolApp.Web.Dtos.Mapper.ApprenantMapper;
 import org.SchoolApp.Web.Dtos.Request.ApprenantRequestDto;
@@ -10,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/apprenants")
+@RequestMapping("/apprenants")
 public class ApprenantController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class ApprenantController {
         ApprenantEntity apprenantEntity = apprenantMapper.toEntity(apprenantRequestDto);
 
         // Call the service layer to handle business logic
-        ApprenantEntity savedApprenant = apprenantService.createApprenant(apprenantEntity);
+        ApprenantEntity savedApprenant = apprenantService.createApprenant(apprenantEntity, apprenantRequestDto.getUserId(),apprenantRequestDto.getReferentielId());
 
         // Convert the saved entity to response DTO
         ApprenantResponseDto responseDto = apprenantMapper.toDto(savedApprenant);

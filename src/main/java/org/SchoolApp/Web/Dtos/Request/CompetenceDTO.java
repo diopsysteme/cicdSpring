@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.SchoolApp.Datas.Entity.CompetencesEntity;
-import org.SchoolApp.Web.Validators.UniqueField;
+import org.SchoolApp.Validators.UniqueField;
 
 import java.util.List;
 

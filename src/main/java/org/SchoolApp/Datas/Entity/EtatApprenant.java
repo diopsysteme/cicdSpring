@@ -10,9 +10,6 @@ import java.util.List;
 @Data
 @Entity
 public class EtatApprenant extends EntityAbstract{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(unique = true, nullable = false)
     private String etat;

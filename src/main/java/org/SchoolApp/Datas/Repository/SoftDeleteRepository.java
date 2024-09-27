@@ -15,7 +15,6 @@ public interface SoftDeleteRepository<T,ID> extends JpaRepository<T, ID> {
     @Transactional
     @Query("UPDATE #{#entityName} e SET e.deleted = true, e.deletedAt = CURRENT_TIMESTAMP WHERE e.id = ?1")
     void softDelete(Long id);
-
-
+    @Query("SELECT e FROM #{#entityName} e WHERE e.deleted = false")
     List<T> findAll();
 }

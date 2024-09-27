@@ -24,7 +24,7 @@ public class UserService {
 
     // Rechercher un utilisateur par email
     public UserEntity getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).orElseThrow();
     }
 
     // Rechercher les utilisateurs par rôle

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.SchoolApp.Datas.Entity.PromoEntity;
 import org.SchoolApp.Datas.Enums.EtatEnum;
-import org.SchoolApp.Web.Validators.UniqueField;
+import org.SchoolApp.Validators.UniqueField;
 
 import java.util.Date;
 

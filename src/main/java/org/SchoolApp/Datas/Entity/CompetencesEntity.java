@@ -12,9 +12,7 @@ import java.util.List;
 @Data
 @ToString
 public class CompetencesEntity extends EntityAbstract {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 
     @Column(unique = true, nullable = false)
     private String nom;

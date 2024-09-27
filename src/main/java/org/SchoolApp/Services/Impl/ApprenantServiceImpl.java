@@ -10,11 +10,12 @@ import org.SchoolApp.Datas.Repository.UserRepository;
 import org.SchoolApp.Services.Interfaces.ApprenantService;
 import org.SchoolApp.Services.Interfaces.EmailService;
 import org.SchoolApp.Services.Interfaces.QRCodeService;
-import org.SchoolApp.Web.Validators.ApprenantValidator;
+import org.SchoolApp.Validators.ApprenantValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -40,11 +41,11 @@ public class ApprenantServiceImpl implements ApprenantService {
     private ApprenantValidator apprenantValidator;
 
     @Override
-    public ApprenantEntity createApprenant(ApprenantEntity apprenant) {
+    public ApprenantEntity createApprenant(ApprenantEntity apprenant,Long userId,Long referentielId) {
         // Valider l'apprenant
-        apprenantValidator.validateApprenant(apprenant);
+//        apprenantValidator.validateApprenant(apprenant);
 
-        UserEntity user = apprenant.getUser();
+    UserEntity user = userRepository.findById(userId).orElseThrow();
 
         // Générer un mot de passe par défaut et le hacher
         String defaultPassword = generateDefaultPassword();
@@ -62,7 +63,7 @@ public class ApprenantServiceImpl implements ApprenantService {
         apprenant.setUser(user);
 
         // Récupérer le référentiel depuis la base de données
-        ReferentielEntity referentiel = referentielRepository.findById(apprenant.getReferentiel().getId())
+        ReferentielEntity referentiel = referentielRepository.findById(referentielId)
                 .orElseThrow(() -> new RuntimeException("Référentiel non trouvé."));
         apprenant.setReferentiel(referentiel);
 

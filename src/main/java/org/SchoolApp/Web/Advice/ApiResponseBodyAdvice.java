@@ -38,6 +38,16 @@ public class ApiResponseBodyAdvice implements ResponseBodyAdvice<Object> {
         return true; // Apply to other paths
     }
 
+
+
+    private String getRequestPath() {
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attrs != null) {
+            HttpServletRequest request = attrs.getRequest();
+            return request.getRequestURI();
+        }
+        return null;
+    }
     @Override
     public Object beforeBodyWrite(
             Object body,
@@ -47,23 +57,16 @@ public class ApiResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             org.springframework.http.server.ServerHttpRequest request,
             org.springframework.http.server.ServerHttpResponse response) {
 
-        if (body instanceof ApiResponse) {
+        // Exclude ApiResponse, String, or already wrapped responses
+        if (body instanceof ApiResponse<?> || body instanceof String) {
             return body;
         }
 
         if (body == null) {
-            return new ApiResponse<>(null, "No data found");
+            return new ApiResponse<>(null, "No data found"); // Correct usage, assuming 'success' is a boolean
         }
 
+        // General success response for non-excluded cases
         return new ApiResponse<>(body, "Success");
-    }
-
-    private String getRequestPath() {
-        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (attrs != null) {
-            HttpServletRequest request = attrs.getRequest();
-            return request.getRequestURI();
-        }
-        return null;
     }
 }

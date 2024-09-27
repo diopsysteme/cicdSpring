@@ -17,10 +17,8 @@ import java.util.Set;
 
 @Data
 @Entity
+@Where(clause = "deleted = false")
 public class PromoEntity extends EntityAbstract{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(nullable = false,unique = true)
     private String libelle;
@@ -41,7 +39,6 @@ public class PromoEntity extends EntityAbstract{
             joinColumns = @JoinColumn(name = "promotion_id"),
             inverseJoinColumns = @JoinColumn(name = "referentiel_id")
     )
-    @Where(clause = "deleted = false")
     private Set<ReferentielEntity> referentiels = new HashSet<>();
 
     @Override
