@@ -1,5 +1,6 @@
 package org.SchoolApp.Web.Controller.Impl;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.SchoolApp.Datas.Entity.PromoEntity;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
@@ -17,7 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/Promotions")
+@RequestMapping("/promo")
 public class PromoController {
     @Autowired
     private PromoService promoService;

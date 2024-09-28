@@ -3,7 +3,7 @@ package org.SchoolApp.Web.Dtos.Request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.SchoolApp.Web.Validators.UniqueField;
+import org.SchoolApp.Validators.UniqueField;
 
 @Data
 public class PromoReferentiel {

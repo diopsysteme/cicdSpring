@@ -2,7 +2,7 @@ package org.SchoolApp.Web.Dtos.Request;
 
 import lombok.Data;
 import org.SchoolApp.Datas.Entity.ReferentielEntity;
-import org.SchoolApp.Web.Validators.UniqueField;
+import org.SchoolApp.Validators.UniqueField;
 
 import java.util.List;
 

@@ -16,5 +16,5 @@ public class ApprenantRequestDto {
     private Long referentielId;  // ID to reference ReferentielEntity
     private Long promoId;        // ID to reference PromoEntity
 
-    private UserRequestDto user; // Data needed to create a user account
+    private Long userId; // Data needed to create a user account
 }

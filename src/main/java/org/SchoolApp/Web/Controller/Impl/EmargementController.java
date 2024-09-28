@@ -1,5 +1,6 @@
 package org.SchoolApp.Web.Controller.Impl;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.SchoolApp.Datas.Entity.ApprenantEntity;
 import org.SchoolApp.Datas.Entity.EmargementEntity;
 import org.SchoolApp.Datas.Entity.UserEntity;

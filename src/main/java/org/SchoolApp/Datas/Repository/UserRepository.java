@@ -6,12 +6,13 @@ import org.SchoolApp.Datas.Enums.StatusEnum;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends SoftDeleteRepository<UserEntity, Long> {
 
     // Trouver un utilisateur par email
-    UserEntity findByEmail(String email);
+    Optional<UserEntity> findByEmail(String email);
 
     // Trouver des utilisateurs par rôle
     List<UserEntity> findByRole(Role role);

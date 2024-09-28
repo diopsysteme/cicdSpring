@@ -20,6 +20,6 @@ public class EmailServiceImpl implements EmailService {
         message.setTo(email);
         message.setSubject("Your Login Credentials");
         message.setText("Login: " + login + "\nPassword: " + password + "\nPlease change your password after login.");
-        mailSender.send(message);  // Send email
+        mailSender.send(message);
     }
 }

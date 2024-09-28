@@ -36,7 +36,6 @@ public class EmergementService implements EmargementIService {
             throw new IllegalArgumentException("L'apprenant avec l'ID " + apprenantId + " n'existe pas");
         }
         UserEntity user = apprenantOptional.get().getUser();
-
         // Calculate start and end of the month
         LocalDate startOfMonth = LocalDate.of(year, month, 1);
         LocalDate endOfMonth = startOfMonth.plusMonths(1).minusDays(1);

@@ -14,10 +14,6 @@ import java.util.List;
 @Entity
 @ToString
 public class ApprenantEntity extends EntityAbstract{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String nomTuteur;
     private String prenomTuteur;
     private String contactTuteur;
@@ -50,7 +46,6 @@ public class ApprenantEntity extends EntityAbstract{
     @JsonIgnore
     @ToString.Exclude
     private ReferentielEntity referentiel;
-
     @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     @ToString.Exclude
