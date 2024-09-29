@@ -18,13 +18,18 @@
 		<license/>
 	</licenses>
 	<developers>
+		<developer>
+		<id>diopsysteme</id>
+		<name>diopsysteme</name>
+		<email>mhdtnboss@gmail.com</email>
+	</developer>
 		<developer/>
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection>scm:git:git@github.com:diopsysteme/dependancies.git</connection>
+		<developerConnection>scm:git:git@github.com:diopsysteme/dependancies.git</developerConnection>
+		<url>https://github.com/diopsysteme/dependancies</url>
+
 	</scm>
 	<dependencies>
 		<dependency>
@@ -172,6 +177,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 	<repositories>
 		<repository>
 			<id>github</id>
