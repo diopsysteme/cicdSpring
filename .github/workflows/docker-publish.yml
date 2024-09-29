@@ -19,6 +19,12 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Build the project
+        run: mvn clean package -U
+
+      - name: Verify JAR file exists
+        run: ls -al target/
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
