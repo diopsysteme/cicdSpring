@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
-
+import prog.dependancy.Datas.Entity.EntityAbstract;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
 @ToString
-public class ApprenantEntity extends EntityAbstract{
+public class ApprenantEntity extends EntityAbstract {
     private String nomTuteur;
     private String prenomTuteur;
     private String contactTuteur;
@@ -50,4 +50,10 @@ public class ApprenantEntity extends EntityAbstract{
     @JsonBackReference
     @ToString.Exclude
     private List<NotesEntity> notes;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promo_id", nullable = true) // Nouveau champ pour la relation avec Promo
+    @JsonIgnore
+    @ToString.Exclude
+    private PromoEntity promo;
 }

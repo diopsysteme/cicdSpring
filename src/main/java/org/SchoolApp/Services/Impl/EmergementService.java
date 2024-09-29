@@ -3,6 +3,7 @@ package org.SchoolApp.Services.Impl;
 import org.SchoolApp.Datas.Entity.ApprenantEntity;
 import org.SchoolApp.Datas.Entity.EmargementEntity;
 import org.SchoolApp.Datas.Entity.UserEntity;
+import org.SchoolApp.Datas.Enums.EtatEnum;
 import org.SchoolApp.Datas.Repository.ApprenantRepository;
 import org.SchoolApp.Datas.Repository.EmargementRepository;
 import org.SchoolApp.Datas.Repository.UserRepository;
@@ -303,16 +304,18 @@ public class EmergementService implements EmargementIService {
         List<ApprenantEntity> apprenants;
 
         if (referentielId != null && promoId == null) {
-            apprenants = apprenantRepository.findApprenantsByReferentielAndActivePromo(referentielId);
+            apprenants = apprenantRepository.findByPromo_EtatAndReferentiel_Id(EtatEnum.ACTIF,referentielId);
         } else if (referentielId != null && promoId != null) {
-            apprenants = apprenantRepository.findApprenantsByPromoIdAndReferentielId(promoId,referentielId);
+            apprenants = apprenantRepository.findByReferentiel_IdAndPromo_Id(referentielId,promoId);
         } else if (promoId != null) {
             apprenants = apprenantRepository.findApprenantsByPromoId(promoId);
         } else {
-            apprenants = apprenantRepository.findApprenantsByActivePromo();
+            apprenants = apprenantRepository.findByPromo_Etat(EtatEnum.ACTIF);
         }
+
         List<EmargementEntity> emargements = new ArrayList<>();
         for (ApprenantEntity apprenant : apprenants) {
+            System.out.println(apprenant);
             UserEntity user = apprenant.getUser();
 
             if (mois != null) {

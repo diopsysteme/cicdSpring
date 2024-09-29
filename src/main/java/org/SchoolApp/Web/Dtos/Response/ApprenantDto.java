@@ -1,7 +1,8 @@
 package org.SchoolApp.Web.Dtos.Response;
 
+import lombok.Data;
 import org.SchoolApp.Web.Dtos.BaseDto;
-
+@Data
 public class ApprenantDto extends BaseDto {
     private String nomTuteur;
     private String prenomTuteur;

@@ -1,9 +1,10 @@
 package org.SchoolApp.Web.Dtos.Request;
 
 import lombok.Data;
+import org.SchoolApp.Web.Dtos.BaseDto;
 
 @Data
-public class ApprenantRequestDto {
+public class ApprenantRequestDto extends BaseDto {
     private String nomTuteur;
     private String prenomTuteur;
     private String contactTuteur;

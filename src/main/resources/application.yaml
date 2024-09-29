@@ -4,6 +4,7 @@ spring:
     username: springprojetDB_owner
     password: JLo7T9vlmVgq
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,3 +15,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
   show-actuator: true
+
+
+myapp:
+  secret:
+    student: passer
