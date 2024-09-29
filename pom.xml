@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -10,28 +12,22 @@
 	</parent>
 	<groupId>org.SchoolApp</groupId>
 	<artifactId>schoolappjava</artifactId>
-	<version>0.0.1-snapshot</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>SchoolAppJava</name>
 	<description>schoolappjava</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer>
-		<id>diopsysteme</id>
-		<name>diopsysteme</name>
-		<email>mhdtnboss@gmail.com</email>
-	</developer>
-		<developer/>
-	</developers>
-	<scm>
-		<connection>scm:git:git@github.com:diopsysteme/dependancies.git</connection>
-		<developerConnection>scm:git:git@github.com:diopsysteme/dependancies.git</developerConnection>
-		<url>https://github.com/diopsysteme/dependancies</url>
 
-	</scm>
+	<!-- Repositories -->
+	<repositories>
+		<repository>
+			<id>github</id>
+			<name>GitHub diopsysteme Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/diopsysteme/dependancies</url>
+		</repository>
+	</repositories>
+
+	<!-- Dependencies -->
 	<dependencies>
+		<!-- Spring Boot Starter Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -51,27 +47,27 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>3.3.4</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
-
-
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+		</dependency>
+		<!-- Other Dependencies -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
@@ -82,46 +78,42 @@
 			<artifactId>javase</artifactId>
 			<version>3.4.1</version>
 		</dependency>
-
-
+		<!-- Your Dependency -->
 		<dependency>
 			<groupId>prog.dependancy</groupId>
 			<artifactId>dependance</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
+		<!-- Database Driver -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
+		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.8.0</version>
-		</dependency>
-
-
-
+		<!-- MapStruct -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-
-
-
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<!-- JSON Web Token -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -131,33 +123,19 @@
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<version>0.11.5</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
-
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct-processor</artifactId>
-			<version>1.6.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
 	<properties>
 		<java.version>21</java.version>
-		<spring-boot.version>3.2.0</spring-boot.version> <!-- Set your Spring Boot version here -->
+		<spring-boot.version>3.3.4</spring-boot.version>
 	</properties>
 
 	<build>
@@ -166,7 +144,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring-boot.version}</version>
-
 				<executions>
 					<execution>
 						<goals>
@@ -177,12 +154,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-	<repositories>
-		<repository>
-			<id>github</id>
-			<url>https://maven.pkg.github.com/diopsysteme/dependancies</url>
-		</repository>
-	</repositories>
 </project>
