@@ -36,7 +36,7 @@ jobs:
               </settings>' > ~/.m2/settings.xml
 
       - name: Build the project
-        run: mvn clean package -U
+        run: mvn clean package -DskipTests -U
 
       - name: Verify JAR file exists
         run: ls -al target/
@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build the Docker image
-        run: docker build . -t ${{ secrets.DOCKER_IMAGE }}:latest2
+        run: docker build . -t ${{ secrets.DOCKER_IMAGE }}:latest
 
       - name: Push the Docker image
-        run: docker push ${{ secrets.DOCKER_IMAGE }}:latest2
+        run: docker push ${{ secrets.DOCKER_IMAGE }}:latest

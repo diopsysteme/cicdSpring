@@ -7,6 +7,7 @@ import org.SchoolApp.Datas.Enums.EtatEnum;
 import org.SchoolApp.Datas.Repository.ApprenantRepository;
 import org.SchoolApp.Datas.Repository.EmargementRepository;
 import org.SchoolApp.Datas.Repository.UserRepository;
+import org.SchoolApp.Exceptions.ResourceNotFoundException;
 import org.SchoolApp.Services.Interfaces.EmargementIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,8 @@ public class EmergementService implements EmargementIService {
     public List<EmargementEntity> getEmargementsByApprenantAndMonth(Long apprenantId, int year, int month) {
         Optional<ApprenantEntity> apprenantOptional = apprenantRepository.findById(apprenantId);
         if (!apprenantOptional.isPresent()) {
-            throw new IllegalArgumentException("L'apprenant avec l'ID " + apprenantId + " n'existe pas");
+
+            throw new ResourceNotFoundException("L'apprenant avec l'ID " + apprenantId + " n'existe pas");
         }
         UserEntity user = apprenantOptional.get().getUser();
         // Calculate start and end of the month
@@ -58,7 +60,7 @@ public class EmergementService implements EmargementIService {
     public List<EmargementEntity> getEmargementsByApprenantId(Long apprenantId) {
         Optional<ApprenantEntity> apprenantOptional = apprenantRepository.findById(apprenantId);
         if (apprenantOptional.isEmpty()) {
-            throw new IllegalArgumentException("L'apprenant avec l'ID " + apprenantId + " n'existe pas");
+            throw new ResourceNotFoundException("L'apprenant avec l'ID " + apprenantId + " n'existe pas");
         }
         UserEntity user = apprenantOptional.get().getUser();
 
@@ -109,7 +111,7 @@ public class EmergementService implements EmargementIService {
                 return emargementRepository.save(existingEmargement);
             } else {
                 // Already checked in and out, no more emargement allowed
-                throw new IllegalStateException("Already checked in and out for this date");
+                throw new ResourceNotFoundException("Already checked in and out for this date");
             }
         } else {
             // First check-in for the day

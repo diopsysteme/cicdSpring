@@ -6,6 +6,7 @@ import org.SchoolApp.Datas.Entity.UserEntity;
 import org.SchoolApp.Datas.Enums.StatusEnum;
 import org.SchoolApp.Datas.Repository.RoleRepository;
 import org.SchoolApp.Datas.Repository.UserRepository;
+import org.SchoolApp.Exceptions.ResourceNotFoundException;
 import org.SchoolApp.Services.Interfaces.AuthenticationIService;
 import org.SchoolApp.Web.Dtos.Mapper.LoginMapper;
 import org.SchoolApp.Web.Dtos.Mapper.UserMapper;
@@ -54,7 +55,7 @@ private UserMapper  userMapper;
 
         // Fetch the Role entity based on roleId
         Role role = roleRepository.findById(input.getRoleId())
-                .orElseThrow(() -> new EntityNotFoundException("Role not found with ID: " + input.getRoleId()));
+                .orElseThrow(() ->  new ResourceNotFoundException("Role not found with ID: " + input.getRoleId()));
         user.setRole(role);
 
         // Save the user entity
